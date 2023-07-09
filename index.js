@@ -30,6 +30,7 @@ console.log(
 
 import {AppRegistry} from 'react-native';
 import account from './Account';
+import home from './home';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => account);
+AppRegistry.registerComponent(appName, () => home);
