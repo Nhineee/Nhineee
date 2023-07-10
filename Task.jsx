@@ -1,17 +1,39 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-const Task = props => {
+function Task(props) {
+  const [isChecked, setIsChecked] = useState(false);
+  const toggleCheckbox = () => {
+    setIsChecked(!isChecked);
+  };
   return (
-    <View style={styles.item}>
+    <View
+      style={{...styles.item, backgroundColor: isChecked ? '#d0d2d5' : '#FFF'}}>
       <View style={styles.itemLeft}>
-        <View style={styles.square} />
-        <Text style={styles.itemText}>{props.text}</Text>
+        <TouchableOpacity style={styles.checkbox} onPress={toggleCheckbox}>
+          {isChecked ? (
+            <Image style={styles.checkImg} source={require('./check.png')} />
+          ) : (
+            <View style={styles.uncheckedSquare} />
+          )}
+        </TouchableOpacity>
+        <Text
+          style={{
+            ...styles.itemText,
+            textDecorationLine: isChecked ? 'line-through' : 'none',
+          }}>
+          {props.text}
+        </Text>
       </View>
-      <View style={styles.circular} />
+      <TouchableOpacity style={styles.deleteButton}>
+        <Image
+          style={styles.deleteButtonImg}
+          source={require('./delete.png')}
+        />
+      </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   item: {
@@ -28,23 +50,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexWrap: 'wrap',
   },
-  square: {
+  checkbox: {
     width: 24,
     height: 24,
+    marginRight: 15,
+  },
+  uncheckedSquare: {
+    width: '100%',
+    height: '100%',
     backgroundColor: '#55BCF6',
     opacity: 0.4,
     borderRadius: 5,
-    marginRight: 15,
+  },
+  checkImg: {
+    width: '100%',
+    height: '100%',
   },
   itemText: {
     maxWidth: '80%',
   },
-  circular: {
-    width: 12,
-    height: 12,
-    borderColor: '#55BCF6',
-    borderWidth: 2,
-    borderRadius: 5,
+  deleteButton: {
+    width: 18,
+    height: 18,
+  },
+  deleteButtonImg: {
+    width: '100%',
+    height: '100%',
   },
 });
 
