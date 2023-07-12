@@ -30,7 +30,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { Image } from 'react-native';
 
 
-function account(): JSX.Element {
+function account({navigation}): JSX.Element {
     const isDarkMode = useColorScheme() === 'dark';
 
     const backgroundStyle = {
@@ -40,7 +40,7 @@ function account(): JSX.Element {
     return (
         <View style={styles.container}>
             <View style={styles.Top}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('home')}>
                     <Icon name='arrow-left' style={styles.icon} />
                 </TouchableOpacity>
 
@@ -68,12 +68,12 @@ function account(): JSX.Element {
                     <View style={styles.inforWrap}>
                         <View style={styles.infor}>
                             <Icon name='user' style={styles.icon} />
-                            <TextInput placeholder='Username' />
+                            <TextInput placeholder='Username' placeholderTextColor={'white'} style={styles.textStyle}/>
                         </View>
 
                         <View style={[styles.infor, { borderTopWidth: 1, borderColor: 'white' }]}>
                             <Icon name='mail' style={styles.icon} />
-                            <Text>123@gmail.com</Text>
+                            <Text style={styles.textStyle}>123@gmail.com</Text>
                         </View>
                     </View>
                 </View>
@@ -83,7 +83,7 @@ function account(): JSX.Element {
                         <Text style={styles.title}>Change Password</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={[styles.wrap, {marginTop:20, borderTopWidth:1, borderColor:'white', paddingVertical: 20, marginHorizontal:20}]}>
+                <View style={[styles.wrap, {paddingVertical: 20, marginHorizontal:20}]}>
                     <TouchableOpacity style={[styles.btn,{borderColor:'#E74646', borderWidth:1}]} onPress={()=>setModalSOVisible(true)}>
                         <Text style={[styles.title, {color:'#E74646'}]}>Sign Out</Text>
                     </TouchableOpacity>
@@ -125,7 +125,8 @@ function account(): JSX.Element {
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1
+        flex: 1,
+        backgroundColor:'#1D1F22'
     },
     icon: {
         fontSize: 25,
@@ -141,7 +142,11 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 16,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        color:'white'
+    },
+    textStyle:{
+        color:'white'
     },
     avatarImg: {
         width: 100,
@@ -199,7 +204,7 @@ const styles = StyleSheet.create({
     },
     modalView: {
         margin: 20,
-        backgroundColor: 'white',
+        backgroundColor: '#1D1F22',
         borderRadius: 10,
         padding: 20,
         alignItems: 'center',

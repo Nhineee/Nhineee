@@ -93,21 +93,22 @@ function MainScreen() {
   );
 }
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="MainScreen"
-          component={MainScreen}
-          options={{
-            headerTitle: LogoTitle,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen
+//           name="MainScreen"
+//           component={MainScreen}
+//           options={{
+//             headerTitle: LogoTitle,
+//           }}
+//         />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+export default MainScreen
 
 const styles = StyleSheet.create({
   header: {
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
 
   safeArea: {
     flex: 1,
-    backgroundColor: '#E8EAED',
+    backgroundColor: '#1D1F22',
   },
   container: {
     flex: 1,
@@ -152,6 +153,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: 'bold',
+    color:'white'
   },
   tasksWrapper: {marginTop: 30},
 

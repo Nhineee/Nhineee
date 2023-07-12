@@ -36,7 +36,7 @@ import { TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 
-function home(): JSX.Element {
+function Home({navigation}): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -87,7 +87,7 @@ function home(): JSX.Element {
       <View style={styles.WrapBigContent}>
         <View style={styles.MiddleWrap}>
           <Text style={styles.miniTitle}>MY TASKS</Text>
-          <TouchableOpacity style={styles.project} onPress={HandPress}>
+          <TouchableOpacity style={styles.project} onPress={()=> navigation.navigate('App')}>
             <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
               <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
             </View>
@@ -117,8 +117,10 @@ function home(): JSX.Element {
 
 
       <View style={styles.HorNav}>
-        <TouchableOpacity>
-          <Icon name="search" style={styles.options} onPress={() => setModalVisible(true)} />
+        
+        {/* Button Tìm kiếm */}
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <Icon name="search" style={styles.options}  />
         </TouchableOpacity>
         {/* <TouchableOpacity >
           <Text style={{color:'white',fontSize:30}}>+</Text>
@@ -145,7 +147,7 @@ function home(): JSX.Element {
               </View>
 
 
-              <TouchableOpacity style={styles.AddButton}><Text style={{ color: '#EA4463' }}>Add to project</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.AddButton} onPress={() => navigation.navigate('App')}><Text style={{ color: '#EA4463' }}>Add to project</Text></TouchableOpacity>
 
               <View style={styles.childStyle} >
 
@@ -247,17 +249,19 @@ function home(): JSX.Element {
           </View>
         </Modal>
 
-
+        {/* Button Tạo Project */}
         <TouchableOpacity onPress={() => setModalAdd(true)}>
           <Icon name="plus" style={[styles.options, { fontSize: 28 }]} />
         </TouchableOpacity>
 
-
-        <TouchableOpacity>
-          <Icon name="bell" style={styles.options} onPress={HandPress} />
+        {/* Button Thông báo */}
+        <TouchableOpacity onPress={() => navigation.navigate('noti')}>
+          <Icon name="bell" style={styles.options} />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Icon name="settings" style={styles.options} onPress={HandPress} />
+
+        {/* Button Account */}
+        <TouchableOpacity onPress={() => navigation.navigate('Account')}>
+          <Icon name="settings" style={styles.options}  />
         </TouchableOpacity>
       </View >
 
@@ -764,4 +768,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default home;
+export default Home;

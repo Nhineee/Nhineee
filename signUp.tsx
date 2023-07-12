@@ -31,7 +31,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 
-function signUp(): JSX.Element {
+function SignUp({navigation}): JSX.Element {
     const isDarkMode = useColorScheme() === 'dark';
 
     const backgroundStyle = {
@@ -48,7 +48,7 @@ function signUp(): JSX.Element {
 
                 <Image
                     style={styles.logo}
-                    source={require('/Users/vnp/taskade/Image/logo.png')}
+                    source={require('./Image/logo.png')}
                 />
 
 
@@ -64,11 +64,11 @@ function signUp(): JSX.Element {
                     <View style={{marginTop:10}}>
                         <TouchableOpacity style={styles.signInOption}><Text style={styles.textOption} > <Image
                             style={styles.ggLogo}
-                            source={require('/Users/vnp/taskade/Image/gglogo.png')}
+                            source={require('./Image/gglogo.png')}
                         />  Sign up with Google</Text></TouchableOpacity>
                         <TouchableOpacity style={styles.signInOption}><Text style={styles.textOption}> <Image
                             style={styles.ggLogo}
-                            source={require('/Users/vnp/taskade/Image/faceLogo.png')}
+                            source={require('./Image/faceLogo.png')}
                         />  Sign up with Facebook</Text></TouchableOpacity>
                     </View>
 
@@ -95,7 +95,7 @@ function signUp(): JSX.Element {
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                     <Text style={styles.textStyle}> Already have an account?</Text>
-                    <TouchableOpacity><Text style={styles.textStyleSU}> Sign In</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('signIn')}><Text style={styles.textStyleSU}> Sign In</Text></TouchableOpacity>
 
                 </View>
             </View>
@@ -204,4 +204,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default signUp;
+export default SignUp;

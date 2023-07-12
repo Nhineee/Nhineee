@@ -35,7 +35,7 @@ import {
 
 
 
-function signIn(): JSX.Element {
+function SignIn({navigation}): JSX.Element {
     const isDarkMode = useColorScheme() === 'dark';
 
     const backgroundStyle = {
@@ -49,7 +49,7 @@ function signIn(): JSX.Element {
             <View style={styles.nameContainer}>
                 <Image
                     style={styles.logo}
-                    source={require('/Users/vnp/taskade/Image/logo.png')}
+                    source={require('./Image/logo.png')}
                 />
             </View>
 
@@ -63,11 +63,11 @@ function signIn(): JSX.Element {
                     <View>
                         <TouchableOpacity style={styles.signInOption}><Text style={styles.textOption} > <Image
                             style={styles.ggLogo}
-                            source={require('/Users/vnp/taskade/Image/gglogo.png')}
+                            source={require('./Image/gglogo.png')}
                         />  Sign in with Google</Text></TouchableOpacity>
                         <TouchableOpacity style={styles.signInOption}><Text style={styles.textOption}> <Image
                             style={styles.ggLogo}
-                            source={require('/Users/vnp/taskade/Image/faceLogo.png')}
+                            source={require('./Image/faceLogo.png')}
                         />  Sign in with Facebook</Text></TouchableOpacity>
 
                         <TextInput style={styles.inputStyle} placeholder='Username or email' placeholderTextColor={'#92969C'} ></TextInput>
@@ -88,7 +88,7 @@ function signIn(): JSX.Element {
                         
                         <Image
                             style={styles.logo}
-                            source={require('/Users/vnp/taskade/Image/logo.png')}
+                            source={require('./Image/logo.png')}
                         />
                         <View style={styles.modalTextView}>
                         <Text style={[styles.modalText,{fontWeight:'bold',fontSize:25}]}>Forgot Password ?</Text>
@@ -114,11 +114,11 @@ function signIn(): JSX.Element {
 
             <View style={styles.loginButtonContainer}>
                 <View>
-                    <TouchableOpacity style={styles.button}><Text style={{ color: 'white' }}>Sign In</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate('home')}><Text style={{ color: 'white' }}>Sign In</Text></TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                     <Text style={styles.textStyle}> Don't have an account?</Text>
-                    <TouchableOpacity><Text style={styles.textStyleSU}> Sign Up</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('signUp')}><Text style={styles.textStyleSU}> Sign Up</Text></TouchableOpacity>
                     
                 </View>
             </View>
@@ -248,4 +248,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default signIn;
+export default SignIn;

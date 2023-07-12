@@ -34,7 +34,7 @@ import {
 
 
 
-function Start(): JSX.Element {
+function Start({navigation}): JSX.Element {
     const isDarkMode = useColorScheme() === 'dark';
 
     const backgroundStyle = {
@@ -51,23 +51,23 @@ function Start(): JSX.Element {
                 <Text style={styles.logoText} > taskade</Text>
             </View>
 
-            {/* <View style={styles.logoContainer}>
+            <View style={styles.logoContainer}>
                 <Image
                     style={styles.signInImage}
-                    source={require('D:/Mobile/demoGit/Image/signInImage.png')}
+                    source={require('./Image/signInImage.png')}
                 />
-            </View> */}
+            </View>
 
             <View style={styles.loginButtonContainer}>
                 <View>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('signIn')}>
                             <Text style={{ color: 'white' }}>Login</Text>
                         </TouchableOpacity>    
                 </View>
 
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                     <Text style={styles.textStyle}> Don't have an account?</Text>
-                    <TouchableOpacity ><Text style={styles.textStyleSU}> Sign Up</Text></TouchableOpacity>
+                    <TouchableOpacity ><Text style={styles.textStyleSU} onPress={() => navigation.navigate('signUp')}> Sign Up</Text></TouchableOpacity>
                 </View>
             </View>
         </View>
