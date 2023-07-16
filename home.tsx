@@ -496,15 +496,14 @@ function Home({ navigation }): JSX.Element {
           <View style={[styles.modalView, { backgroundColor: '#333538' }]}>
 
             <View style={[styles.flex, { width: 350, marginBottom: 10 }]}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>Create a Workspace</Text>
+              <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>Invite to Workspace</Text>
               <TouchableOpacity onPress={() => setModalInvite(!modalInvite)}>
                 <Icon name='x' style={[styles.options, { color: 'white' }]} />
               </TouchableOpacity>
             </View>
 
             <View style={styles.invite}>
-              <Text style={[styles.textDate, { fontWeight: 'bold' }]}>Invite to Workspace</Text>
-              <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center', marginTop: 10 }}>
+              <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
                 {/* Khi nhấn btn, thì thông tin của user sẽ được hiện ở phần invite */}
                 <TouchableOpacity style={{ backgroundColor: '#DDDDDD', width: 40, height: 40, borderRadius: 100, padding: 10, alignItems: 'center', justifyContent: 'center' }}>
                   <Icon name='user-plus' size={20} />
