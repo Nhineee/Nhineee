@@ -42,7 +42,8 @@ function Noti({ navigation }): JSX.Element {
     const [modalVisible2, setModalVisible2] = useState(false);
     const [modalVisible3, setModalVisible3] = useState(false);
     const [modalAdd, setModalAdd] = useState(false);
-
+    const [menuResponsive, setMenuResponsive] = useState(false);
+    const [modalCreateW, setModalCreateW] = useState(false);
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     };
@@ -52,7 +53,7 @@ function Noti({ navigation }): JSX.Element {
     return (
         <View style={styles.container}>
             <View style={styles.Top}>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={() => setMenuResponsive(true)}>
                     <Icon name='menu' style={styles.options} />
                 </TouchableOpacity>
                 <Text style={[styles.fontStyle]}>Activity</Text>
@@ -64,7 +65,7 @@ function Noti({ navigation }): JSX.Element {
                 <ScrollView>
                     {/* Option 1 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -74,7 +75,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 2 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -84,7 +85,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 3 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -94,7 +95,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 4 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -104,7 +105,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 5 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -114,7 +115,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 6 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -124,7 +125,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 7 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -134,7 +135,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 8 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -144,7 +145,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 9 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -154,7 +155,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 10 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -164,7 +165,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 11 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -174,7 +175,7 @@ function Noti({ navigation }): JSX.Element {
                     </TouchableOpacity>
                     {/* Option 12 */}
                     <TouchableOpacity style={styles.project}>
-                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                         </View>
                         <View style={styles.projectTitle}>
@@ -235,7 +236,7 @@ function Noti({ navigation }): JSX.Element {
 
                                 {/* Vung hien thi thong tin tim kiem */}
                                 {/* <TouchableOpacity style={styles.project} onPress={HandPress}>
-                                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+                                        <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#EA4463' }]}>
                                             <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
                                         </View>
                                         <View style={[styles.wrapContent, { alignSelf: 'center' }]}>
@@ -379,15 +380,121 @@ function Noti({ navigation }): JSX.Element {
                             <Text style={[styles.pTitle, { fontWeight: '300', color: '#9D9D9D' }]}>Are you sure you want to mark all as read?</Text>
                         </View>
                         <View style={styles.wrapBTN}>
-                            <TouchableOpacity style={[styles.btnStyle, { borderColor: '#E74646', borderWidth: 2 }]}>
-                                <Text style={[styles.pTitle, { color: '#E74646' }]}>Mark all as read</Text>
+                            <TouchableOpacity style={[styles.btnStyle, { borderColor: '#EA4463', borderWidth: 2 }]}>
+                                <Text style={[styles.pTitle, { color: '#EA4463' }]}>Mark all as read</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={[styles.btnStyle, { backgroundColor: '#E74646' }]} onPress={() => setModalMarkVisible(false)}>
+                            <TouchableOpacity style={[styles.btnStyle, { backgroundColor: '#EA4463' }]} onPress={() => setModalMarkVisible(false)}>
                                 <Text style={[styles.pTitle]}>Cancel</Text>
                             </TouchableOpacity>
                         </View>
 
 
+                    </View>
+                </View>
+            </Modal>
+
+
+            {/* Menu Responsive */}
+
+            <Modal
+                animationType="none"
+                transparent={true}
+                visible={menuResponsive}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                    setMenuResponsive(!menuResponsive)
+                }}
+            >
+                <View style={styles.leftView}>
+                    <View style={styles.menuContent}>
+
+                        <View style={styles.headMenu}>
+                            {/* When click btn, app will navigate to the recent Workspace */}
+                            <TouchableOpacity style={styles.spaceName} onPress={() => navigation.navigate('home')}>
+                                {/* Hiển Thị tên WorkSpace hiện tại */}
+                                <Text style={{ fontSize: 18, color: '#EA4463', fontWeight: 'bold' }}>Workspace</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => setMenuResponsive(!menuResponsive)}>
+                                <Icon name='chevron-left' size={25} color={'#EA4463'} />
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={styles.workSpacesContainer}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 }}>
+                                <Text style={{ color: 'white' }}>WORKSPACES</Text>
+                                <TouchableOpacity style={{ backgroundColor: '#616161', borderRadius: 10, padding: 5 }} onPress={() => setModalCreateW(true)}>
+                                    <Icon name='plus' size={20} color={'white'} />
+                                </TouchableOpacity>
+                            </View>
+
+                            <View style={styles.workSpaceWrapper}>
+                                <TouchableOpacity style={{ padding: 10, borderRadius: 5, flexDirection: 'row', justifyContent: 'flex-start', gap: 10, alignItems: 'center' }}>
+                                    {/* Hiện thị logo của Work Space */}
+                                    <View style={{ backgroundColor: '#EA4463', padding: 10, borderRadius: 10, justifyContent: 'center', alignItems: 'center', width: 35 }}>
+                                        <Text style={{ color: 'white', }}>S</Text>
+                                    </View>
+                                    {/* Hiện thị tên của Work Space */}
+                                    <Text style={{ color: 'white' }}>SSD</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity style={{ padding: 10, borderRadius: 5, flexDirection: 'row', justifyContent: 'flex-start', gap: 10, alignItems: 'center' }}>
+                                    {/* Hiện thị logo của Work Space */}
+                                    <View style={{ backgroundColor: '#EA4463', padding: 10, borderRadius: 10, justifyContent: 'center', alignItems: 'center', width: 35 }}>
+                                        <Text style={{ color: 'white', }}>W</Text>
+                                    </View>
+                                    {/* Hiện thị tên của Work Space */}
+                                    <Text style={{ color: 'white' }}>SSD</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity style={{ padding: 10, borderRadius: 5, flexDirection: 'row', justifyContent: 'flex-start', gap: 10, alignItems: 'center', }}>
+                                    {/* Hiện thị logo của Work Space */}
+                                    <View style={{ backgroundColor: '#EA4463', padding: 10, borderRadius: 10, justifyContent: 'center', alignItems: 'center', width: 35 }}>
+                                        <Text style={{ color: 'white' }}>S</Text>
+                                    </View>
+
+                                    {/* Hiện thị tên của Work Space */}
+                                    <Text style={{ color: 'white' }}>Software Engineering</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+
+            {/* Modal "Create a WorkSpace" */}
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalCreateW}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                    setModalCreateW(!modalCreateW);
+                }}>
+                <View style={styles.centeredView}>
+                    <View style={[styles.modalView, { backgroundColor: '#333538' }]}>
+
+                        <View style={[styles.flex, { width: 350, marginBottom: 10, paddingBottom: 10 }]}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>Create a Workspace</Text>
+                            <TouchableOpacity style={{}} onPress={() => setModalCreateW(!modalCreateW)}>
+                                <Icon name='x' style={[styles.options, { color: 'white' }]} />
+                            </TouchableOpacity>
+                        </View>
+
+                        <TextInput style={styles.Input} placeholder='Ex.Acme or Acme Marketing' placeholderTextColor={'#BABABA'}></TextInput>
+                        <View style={styles.invite}>
+                            <Text style={[styles.textDate, { fontWeight: 'bold', marginTop: 10 }]}>Invite to Workspace</Text>
+                            <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center', marginTop: 10 }}>
+                                <View style={{ backgroundColor: '#DDDDDD', width: 40, height: 40, borderRadius: 100, padding: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='user-plus' size={20} />
+                                </View>
+                                <TextInput placeholder='Search by e-mail or username' placeholderTextColor={'#B3B3B3'} style={{ borderBottomWidth: 1, width: 300, borderBottomColor: '#B3B3B3' }} />
+                            </View>
+                            <TouchableOpacity style={{ backgroundColor: "#EA4463", borderRadius: 10, padding: 10, justifyContent: 'center', alignItems: 'center', width: 350, marginTop: 20 }}>
+                                <Text style={[styles.textDate, { fontSize: 15, fontWeight: 'bold' }]}>Invite</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </Modal>
@@ -420,7 +527,7 @@ const styles = StyleSheet.create({
     },
     modalView: {
         margin: 20,
-        backgroundColor: 'white',
+        backgroundColor: '#2E3135',
         borderRadius: 10,
         padding: 20,
         alignItems: 'center',
@@ -444,7 +551,7 @@ const styles = StyleSheet.create({
     },
 
     btnStyle: {
-        // backgroundColor: '#E74646',
+        // backgroundColor: '#EA4463',
         width: 300,
         justifyContent: 'center',
         alignItems: 'center',
@@ -511,7 +618,7 @@ const styles = StyleSheet.create({
     Input: {
         width: 350,
         padding: 10,
-        backgroundColor: '#DDDDDD',
+        backgroundColor: '#5B5B5B',
         borderRadius: 10,
         // borderWidth:1,
         // borderColor:'grey'
@@ -659,6 +766,55 @@ const styles = StyleSheet.create({
         borderRadius: 20,
 
 
+    },
+    leftView: {
+        flex: 1,
+        // justifyContent: 'flex-start',
+        // alignItems: 'flex-start',
+        backgroundColor: '#2E3135',
+        flexDirection: 'column',
+        width: 300,
+    },
+    menuContent: {
+        // margin: 20,
+        // backgroundColor: 'white',
+        // borderRadius: 10,
+        padding: 10,
+        // flexDirection:'row',
+        // gap: 50
+
+        // alignItems: 'center',
+    },
+    spaceName: {
+        height: 50,
+        justifyContent: 'center',
+
+    },
+    headMenu: {
+        flexDirection: 'row',
+        borderBottomWidth: 0.5,
+        borderColor: '#4E4E4E',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    workSpacesContainer: {
+        // marginTop:10,
+        paddingVertical: 10
+    },
+    workSpaceWrapper: {
+        // padding:20
+    },
+    invite: {
+        flexDirection: 'column',
+        marginTop: 10,
+        // paddingVertical: 20
+        // justifyContent: 'center',
+        // alignItems: 'flex-start',
+    },
+    textDate: {
+        fontSize: 15,
+        color: 'white',
+        fontWeight: 'normal'
     },
 });
 export default Noti

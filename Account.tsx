@@ -30,7 +30,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { Image } from 'react-native';
 
 
-function account({navigation}): JSX.Element {
+function Account({ navigation }): JSX.Element {
     const isDarkMode = useColorScheme() === 'dark';
 
     const backgroundStyle = {
@@ -46,51 +46,62 @@ function account({navigation}): JSX.Element {
 
                 <Text style={styles.title}>My Account</Text>
                 <TouchableOpacity>
-                    <Text style={styles.title}>Save</Text>
+                    <Text style={[styles.title,{color:'#EA4463'}]}>Save</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.Content}>
-                <View style={[styles.wrap,{marginTop: 50}]}>
+                <View style={[styles.wrap, { marginTop: 50 }]}>
                     <View style={styles.avatar}>
+                        {/* When click btn, user can change their avatar */}
                         <TouchableOpacity>
-                        <Image
-                            style={styles.avatarImg}
-                            source={{
-                                uri: 'https://img.freepik.com/free-vector/cute-bear-holding-honeycomb-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated_138676-7331.jpg?w=2000',
-                            }}
-                        />
+                            <Image
+                                style={styles.avatarImg}
+                                source={{
+                                    uri: 'https://img.freepik.com/free-vector/cute-bear-holding-honeycomb-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated_138676-7331.jpg?w=2000',
+                                }}
+                            />
                         </TouchableOpacity>
-                        
+
                     </View>
                 </View>
 
                 <View style={styles.wrapForm}>
                     <View style={styles.inforWrap}>
                         <View style={styles.infor}>
-                            <Icon name='user' style={styles.icon} />
-                            <TextInput placeholder='Username' placeholderTextColor={'white'} style={styles.textStyle}/>
+                            <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
+                                <Icon name='user' style={styles.icon} />
+                                <TextInput placeholder='Username' placeholderTextColor={'white'} style={styles.textStyle} />
+                            </View>
+
+                            {/* When click btn, user can edit their name */}
+                            <TouchableOpacity>
+                                <Icon name='edit-3' style={styles.icon} />
+                            </TouchableOpacity>
+
                         </View>
 
-                        <View style={[styles.infor, { borderTopWidth: 1, borderColor: 'white' }]}>
+                        <View style={[styles.infor, { borderTopWidth: 1, borderColor: '#4E4E4E', gap: 10, justifyContent: 'flex-start' }]}>
                             <Icon name='mail' style={styles.icon} />
                             <Text style={styles.textStyle}>123@gmail.com</Text>
+
                         </View>
                     </View>
                 </View>
 
                 <View style={styles.wrap}>
-                    <TouchableOpacity style={[styles.btn,{backgroundColor:'#E74646',}]}>
+                    <TouchableOpacity style={[styles.btn, { backgroundColor: '#EA4463', }]}>
                         <Text style={styles.title}>Change Password</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={[styles.wrap, {paddingVertical: 20, marginHorizontal:20}]}>
-                    <TouchableOpacity style={[styles.btn,{borderColor:'#E74646', borderWidth:1}]} onPress={()=>setModalSOVisible(true)}>
-                        <Text style={[styles.title, {color:'#E74646'}]}>Sign Out</Text>
+                <View style={[styles.wrap, { paddingVertical: 20, marginHorizontal: 20 }]}>
+                    <TouchableOpacity style={[styles.btn, { borderColor: '#EA4463', borderWidth: 1 }]} onPress={() => setModalSOVisible(true)}>
+                        <Text style={[styles.title, { color: '#EA4463' }]}>Sign Out</Text>
                     </TouchableOpacity>
                 </View>
 
             </View>
-            
+
+            {/* Modal cho Sign Out btn */}
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -101,16 +112,16 @@ function account({navigation}): JSX.Element {
                 }}
             >
                 <View style={styles.centerView}>
-                    <View style={styles.modalView}>
+                    <View style={[styles.modalView]}>
                         <View style={styles.wrapContent}>
                             <Text style={[styles.title]}>Sign Out</Text>
-                            <Text style={[styles.title,{fontWeight:'300', color:'#9D9D9D'}]}>Are you sure you want to sign out?</Text>
+                            <Text style={[styles.title, { fontWeight: '300', color: '#9D9D9D' }]}>Are you sure you want to sign out?</Text>
                         </View>
                         <View style={styles.wrapBTN}>
-                            <TouchableOpacity style={[styles.btn, {borderColor:'#E74646', borderWidth:2}]}>
-                                <Text style={[styles.title, {color:'#E74646'}]}>Sign Out</Text>
+                            <TouchableOpacity style={[styles.btn, { borderColor: '#EA4463', borderWidth: 2 }]}>
+                                <Text style={[styles.title, { color: '#EA4463' }]}>Sign Out</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={[styles.btn, {backgroundColor:'#E74646'}]} onPress={()=>setModalSOVisible(false)}>
+                            <TouchableOpacity style={[styles.btn, { backgroundColor: '#EA4463' }]} onPress={() => setModalSOVisible(false)}>
                                 <Text style={[styles.title]}>Cancel</Text>
                             </TouchableOpacity>
                         </View>
@@ -124,9 +135,9 @@ function account({navigation}): JSX.Element {
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
-        backgroundColor:'#1D1F22'
+        backgroundColor: '#1D1F22'
     },
     icon: {
         fontSize: 25,
@@ -141,12 +152,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     title: {
-        fontSize: 16,
-        fontWeight:'bold',
-        color:'white'
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: 'white'
     },
-    textStyle:{
-        color:'white'
+    textStyle: {
+        color: 'white'
     },
     avatarImg: {
         width: 100,
@@ -164,7 +175,7 @@ const styles = StyleSheet.create({
     wrap: {
         flexDirection: 'row',
         justifyContent: 'center',
-        
+
     },
     inforWrap: {
         // paddingHorizontal: 10,
@@ -173,28 +184,28 @@ const styles = StyleSheet.create({
     infor: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 10,
         // backgroundColor:'red',
-        height: 70
+        height: 70,
+        justifyContent: 'space-between'
 
     },
-    btn:{
+    btn: {
         width: 300,
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: 10,
         borderRadius: 5,
-        marginHorizontal:10
+        marginHorizontal: 10
     },
     wrapContent: {
-        alignItems:'center',
-        justifyContent:'center',
-        marginBottom:30
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 30
     },
-    wrapBTN:{
+    wrapBTN: {
         gap: 10
     },
-   
+
     centerView: {
         flex: 1,
         justifyContent: 'center',
@@ -204,12 +215,12 @@ const styles = StyleSheet.create({
     },
     modalView: {
         margin: 20,
-        backgroundColor: '#1D1F22',
+        backgroundColor: '#2E3135',
         borderRadius: 10,
         padding: 20,
         alignItems: 'center',
-        flexDirection:'column'
+        flexDirection: 'column'
     },
 })
 
-export default account;
+export default Account;

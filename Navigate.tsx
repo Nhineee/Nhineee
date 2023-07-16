@@ -7,8 +7,10 @@ import SignIn from './signIn';
 import SignUp from './signUp';
 import home from './home';
 import Noti from './notiView';
-import account from './Account';
+import Account from './Account';
 import MainScreen from './App';
+import LogoTitle from './App';
+
 
 
 
@@ -23,8 +25,9 @@ import MainScreen from './App';
           <Stack.Screen name="signUp" component={SignUp} options={{headerShown: false, animation: 'none'}}/>
           <Stack.Screen name="home" component={home} options={{headerShown: false, animation: 'none'}}/>
           <Stack.Screen name="noti" component={Noti} options={{headerShown: false, animation: 'none'}}/>
-          <Stack.Screen name="Account" component={account} options={{headerShown: false, animation: 'none'}}/>
-          <Stack.Screen name="App" component={MainScreen} options={{headerShown: true, animation: 'none'}}/>
+          <Stack.Screen name="Account" component={Account} options={{headerShown: false, animation: 'none'}}/>
+          <Stack.Screen name="App" component={MainScreen} options={{headerShown: true, animation: 'none'}}/>  
+          {/* headerTitle:LogoTitle */}
         </Stack.Navigator>
       </NavigationContainer>
 

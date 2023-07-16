@@ -20,6 +20,7 @@ import {
   useColorScheme,
   View,
   Modal,
+  Image,
 
 } from 'react-native';
 
@@ -36,26 +37,28 @@ import { TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 
-function Home({navigation}): JSX.Element {
+function Home({ navigation }): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
 
-  });
 
-  const HandPress = () => {
-    Alert.alert('Hello', 'Nezuko-chan!!');
-  }
+
+
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
   const [modalVisible3, setModalVisible3] = useState(false);
   const [modalAdd, setModalAdd] = useState(false);
   const [menuResponsive, setMenuResponsive] = useState(false);
-  const [modalCreateW, setModalCreateW] = useState(false)
+  const [modalCreateW, setModalCreateW] = useState(false);
+  const [modalDate, setModalDate] = useState(false);
+  const [modalAssign, setModalAssign] = useState(false);
+  const [modalTag, setModalTag] = useState(false);
+  const [modalInvite, setModalInvite] = useState(false)
 
 
   return (
@@ -65,11 +68,12 @@ function Home({navigation}): JSX.Element {
           <TouchableOpacity onPress={() => setMenuResponsive(true)}>
             <Icon name='menu' style={styles.options} />
           </TouchableOpacity>
-          <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#E74646' }}>Workspace</Text>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#EA4463' }}>Workspace</Text>
         </View>
 
-        <TouchableOpacity onPress={HandPress}>
-          <Icon name='user-plus' style={[styles.options, { color: '#E74646' }]} />
+        {/* Btn Invite  */}
+        <TouchableOpacity onPress={() => setModalInvite(true)}>
+          <Icon name='user-plus' style={[styles.options, { color: '#EA4463' }]} />
         </TouchableOpacity>
 
       </View>
@@ -85,24 +89,67 @@ function Home({navigation}): JSX.Element {
       </View>
 
       <View style={styles.WrapBigContent}>
-        <View style={styles.MiddleWrap}>
-          <Text style={styles.miniTitle}>MY TASKS</Text>
-          <TouchableOpacity style={styles.project} onPress={()=> navigation.navigate('App')}>
+
+        <Text style={styles.miniTitle}>MY TASKS</Text>
+
+        <View style={styles.Projects}>
+          {/* Contain Project */}
+          <TouchableOpacity style={styles.project} onPress={() => navigation.navigate('App')}>
             <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
               <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
             </View>
+
             <View style={styles.wrapContent}>
               <Text style={styles.pTitle}>Getting started</Text>
+
+              {/* Contain Options */}
               <View style={styles.note}>
-                <TouchableOpacity style={styles.noteButton} onPress={HandPress}>
+                {/* Btn Date */}
+                <TouchableOpacity style={styles.noteButton} onPress={() => setModalDate(true)}>
                   <Icon name='calendar' style={styles.icon} />
                   <Text style={styles.noteText}>Date</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.noteButton} onPress={HandPress}>
+
+                {/* Btn Assign */}
+                <TouchableOpacity style={styles.noteButton} onPress={() => setModalAssign(true)}>
                   <Icon name='user' style={styles.icon} />
                   <Text style={styles.noteText}>Assign</Text>
                 </TouchableOpacity >
-                <TouchableOpacity style={styles.noteButton} onPress={HandPress}>
+
+                {/* Btn Tag */}
+                <TouchableOpacity style={styles.noteButton} onPress={() => setModalTag(true)}>
+                  <Icon name='tag' style={styles.icon} />
+                  <Text style={styles.noteText}>Tag</Text>
+                </TouchableOpacity>
+
+              </View>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.project} onPress={() => navigation.navigate('App')}>
+            <View style={[styles.iconW, { alignSelf: 'center', width: 45, height: 45, backgroundColor: '#E74646' }]}>
+              <Icon name='file-text' style={[styles.icon, { color: 'white', fontSize: 25 }]} />
+            </View>
+
+            <View style={styles.wrapContent}>
+              <Text style={styles.pTitle}>Getting started</Text>
+
+              {/* Contain Options */}
+              <View style={styles.note}>
+                {/* Btn Date */}
+                <TouchableOpacity style={styles.noteButton} onPress={() => setModalDate(true)}>
+                  <Icon name='calendar' style={styles.icon} />
+                  <Text style={styles.noteText}>Date</Text>
+                </TouchableOpacity>
+
+                {/* Btn Assign */}
+                <TouchableOpacity style={styles.noteButton} onPress={() => setModalAssign(true)}>
+                  <Icon name='user' style={styles.icon} />
+                  <Text style={styles.noteText}>Assign</Text>
+                </TouchableOpacity >
+
+                {/* Btn Tag */}
+                <TouchableOpacity style={styles.noteButton} onPress={() => setModalTag(true)}>
                   <Icon name='tag' style={styles.icon} />
                   <Text style={styles.noteText}>Tag</Text>
                 </TouchableOpacity>
@@ -110,17 +157,138 @@ function Home({navigation}): JSX.Element {
             </View>
           </TouchableOpacity>
         </View>
-
-
       </View>
 
 
+      {/* Here is the Date Modal for Btn Date */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalDate}
+      >
+        <View style={styles.centeredView}>
+          <View style={[styles.modalView, { backgroundColor: '#333538' }]}>
+
+            <View style={[styles.flex, { width: 350, marginBottom: 10, paddingBottom: 10 }]}>
+              <TouchableOpacity onPress={() => setModalDate(false)}>
+                <Text style={styles.textDate}>Close</Text>
+              </TouchableOpacity>
+
+              <Text style={[styles.textDate, { fontWeight: 'bold' }]}>Due Date</Text>
+              <TouchableOpacity>
+                <Text style={[styles.textDate, { color: '#EA4463' }]}>Save</Text>
+              </TouchableOpacity>
+
+            </View>
+
+            <View style={styles.endDate}>
+              <Text style={styles.textDate}>End Date</Text>
+              <TouchableOpacity style={styles.Calendar}>
+                <Text style={styles.textDate}>13 Jul 2023</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+
+      {/* Here is the Assign Modal for Btn Assign */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalAssign}
+      >
+        <View style={styles.centeredView}>
+          <View style={[styles.modalView, { backgroundColor: '#2E3135' }]}>
+
+            <View style={[styles.flex, { width: 350, marginBottom: 10, paddingBottom: 10 }]}>
+              <Text style={[styles.textDate, { fontWeight: '300' }]}>ASSIGN TO</Text>
+              <TouchableOpacity style={{}} onPress={() => setModalAssign(!modalAssign)}>
+                <Icon name='x' style={[styles.options, { color: 'white' }]} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.UserContainer}>
+              <TouchableOpacity style={styles.Infor}>
+                <View style={styles.avt}>
+                  {/* Contain User'Avatar */}
+                  <Image source={{ uri: "" }} />
+                </View>
+                {/* Contain User'Name */}
+                <Text style={styles.textDate}>Name</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.Infor}>
+                <View style={styles.avt}>
+                  {/* Contain User'Avatar */}
+                  <Image source={{ uri: "" }} />
+                </View>
+                {/* Contain User'Name */}
+                <Text style={styles.textDate}>Name</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+
+      {/* Here is the Tag Modal for Btn Tag */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalTag}
+      >
+        <View style={styles.centeredView}>
+          <View style={[styles.modalView, { backgroundColor: '#2E3135' }]}>
+
+            <View style={[styles.flex, { width: 350, marginBottom: 10, paddingBottom: 10 }]}>
+              <Text style={[styles.textDate, { fontWeight: '300' }]}>TAGS</Text>
+              <TouchableOpacity style={{}} onPress={() => setModalTag(!modalTag)}>
+                <Icon name='x' style={[styles.options, { color: 'white' }]} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.UserContainer}>
+              <TouchableOpacity style={styles.Infor}>
+                <Icon name='tag' style={[styles.icon, { color: '#FD7171' }]} />
+                {/* Contain Tag'Name */}
+                <Text style={styles.textDate}>Critial</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.Infor}>
+                <Icon name='tag' style={[styles.icon, { color: '#FE3737' }]} />
+                {/* Contain Tag'Name */}
+                <Text style={styles.textDate}>High</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.Infor}>
+                <Icon name='tag' style={[styles.icon, { color: '#EE7925' }]} />
+                {/* Contain Tag'Name */}
+                <Text style={styles.textDate}>In Progress</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.Infor}>
+                <Icon name='tag' style={[styles.icon, { color: '#FDCD26' }]} />
+                {/* Contain Tag'Name */}
+                <Text style={styles.textDate}>Medium</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.Infor}>
+                <Icon name='tag' style={[styles.icon, { color: '#31C23F' }]} />
+                {/* Contain Tag'Name */}
+                <Text style={styles.textDate}>Low</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
 
       <View style={styles.HorNav}>
-        
+
         {/* Button Tìm kiếm */}
         <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Icon name="search" style={styles.options}  />
+          <Icon name="search" style={styles.options} />
         </TouchableOpacity>
         {/* <TouchableOpacity >
           <Text style={{color:'white',fontSize:30}}>+</Text>
@@ -142,7 +310,10 @@ function Home({navigation}): JSX.Element {
 
               <View style={styles.inputStyle}>
                 <TextInput style={{ color: 'white' }} placeholder='Add a new task...' placeholderTextColor={'#92969C'} ></TextInput>
-                <TouchableOpacity style={styles.DateButton} ><Text style={styles.DateText}>Date</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.DateButton} onPress={() => setModalDate(true)}>
+                  <Icon name='calendar' style={styles.icon} />
+                  <Text style={styles.DateText}>Date</Text>
+                </TouchableOpacity>
 
               </View>
 
@@ -261,10 +432,12 @@ function Home({navigation}): JSX.Element {
 
         {/* Button Account */}
         <TouchableOpacity onPress={() => navigation.navigate('Account')}>
-          <Icon name="settings" style={styles.options}  />
+          <Icon name="settings" style={styles.options} />
         </TouchableOpacity>
       </View >
 
+
+      {/* Modal Search */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -274,17 +447,17 @@ function Home({navigation}): JSX.Element {
           setModalVisible(!modalVisible);
         }}>
         <View style={styles.centeredView}>
-          <View style={[styles.modalView, {alignItems: 'center'}]}>
+          <View style={[styles.modalView, { alignItems: 'center' }]}>
 
             <View style={[styles.flex, { width: 350, marginBottom: 10, paddingBottom: 10 }]}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Quick Search</Text>
+              <Text style={{ fontSize: 20, fontWeight: 'bold', color: "white" }}>Quick Search</Text>
               <TouchableOpacity style={{}} onPress={() => setModalVisible(!modalVisible)}>
-                <Icon name='x' style={[styles.options, { color: 'black' }]} />
+                <Icon name='x' style={[styles.options, { color: 'white' }]} />
               </TouchableOpacity>
             </View>
 
 
-            <TextInput style={styles.Input} placeholder='Search'></TextInput>
+            <TextInput style={styles.Input} placeholder='Search' placeholderTextColor={'#BABABA'}></TextInput>
             <View style={styles.searchContent}>
               <ScrollView style={styles.searchScrollView}>
                 {/* Vung hien thi thong tin tim kiem */}
@@ -300,16 +473,81 @@ function Home({navigation}): JSX.Element {
 
               {/* Noi dung hien thi khi chua co tim kiem */}
               <View style={styles.blankContent}>
-                <Icon name="search" style={[styles.options, { color: 'black', alignSelf: 'center', alignContent: 'center' }]} />
-                <Text style={styles.modalText}>Search all projects, comments and workspaces</Text>
+                <Icon name="search" style={[styles.options, { color: '#B3B3B3', alignSelf: 'center', alignContent: 'center' }]} />
+                <Text style={styles.textDate}>Search all projects, comments and workspaces</Text>
               </View>
             </View>
           </View>
         </View>
       </Modal>
 
-      {/* Modal "Create a WorkSpace" */}
 
+      {/* Modal for Btn Invite */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalInvite}
+        onRequestClose={(e) => {
+          Alert.alert('Modal has been closed.');
+          setModalInvite(!modalInvite);
+
+        }}>
+        <View style={styles.centeredView}>
+          <View style={[styles.modalView, { backgroundColor: '#333538' }]}>
+
+            <View style={[styles.flex, { width: 350, marginBottom: 10 }]}>
+              <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>Create a Workspace</Text>
+              <TouchableOpacity onPress={() => setModalInvite(!modalInvite)}>
+                <Icon name='x' style={[styles.options, { color: 'white' }]} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.invite}>
+              <Text style={[styles.textDate, { fontWeight: 'bold' }]}>Invite to Workspace</Text>
+              <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center', marginTop: 10 }}>
+                {/* Khi nhấn btn, thì thông tin của user sẽ được hiện ở phần invite */}
+                <TouchableOpacity style={{ backgroundColor: '#DDDDDD', width: 40, height: 40, borderRadius: 100, padding: 10, alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon name='user-plus' size={20} />
+                </TouchableOpacity>
+                <TextInput placeholder='Search by e-mail or username' placeholderTextColor={'#B3B3B3'} style={{ borderBottomWidth: 1, width: 300, borderBottomColor: '#B3B3B3' }} />
+              </View>
+
+              <View style={{ flexDirection: 'column', justifyContent: 'flex-start', paddingVertical: 10, gap: 10 }}>
+
+                {/* Số trong dấu ngoặc sẽ hiện số lượng user được mời */}
+                <Text style={styles.textDate}>Invite (2)</Text>
+
+                {/* Hiện tất cả user được mời */}
+                <View style={{ gap: 10 }}>
+                  <TouchableOpacity style={styles.Infor}>
+                    <View style={[styles.avt, { width: 40, height: 40 }]}>
+                      {/* Contain User'Avatar */}
+                      <Image source={{ uri: "" }} />
+                    </View>
+                    {/* Contain User'Name */}
+                    <Text style={styles.textDate}>Name</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.Infor}>
+                    <View style={[styles.avt, { width: 40, height: 40 }]}>
+                      {/* Contain User'Avatar */}
+                      <Image source={{ uri: "" }} />
+                    </View>
+                    {/* Contain User'Name */}
+                    <Text style={styles.textDate}>Name</Text>
+                  </TouchableOpacity>
+                </View>
+
+              </View>
+              <TouchableOpacity style={{ backgroundColor: "#EA4463", borderRadius: 10, padding: 10, justifyContent: 'center', alignItems: 'center', width: 350, marginTop: 20 }} onPress={() => setModalInvite(!modalInvite)}>
+                <Text style={[styles.textDate, { fontSize: 15, fontWeight: 'bold' }]}>Invite</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+
+      {/* Modal "Create a WorkSpace" */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -319,26 +557,26 @@ function Home({navigation}): JSX.Element {
           setModalCreateW(!modalCreateW);
         }}>
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View style={[styles.modalView, { backgroundColor: '#333538' }]}>
 
             <View style={[styles.flex, { width: 350, marginBottom: 10, paddingBottom: 10 }]}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Create a Workspace</Text>
+              <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>Create a Workspace</Text>
               <TouchableOpacity style={{}} onPress={() => setModalCreateW(!modalCreateW)}>
-                <Icon name='x' style={[styles.options, { color: 'black' }]} />
-
+                <Icon name='x' style={[styles.options, { color: 'white' }]} />
               </TouchableOpacity>
             </View>
-            <TextInput style={styles.Input} placeholder='Ex.Acme or Acme Marketing'></TextInput>
+
+            <TextInput style={styles.Input} placeholder='Ex.Acme or Acme Marketing' placeholderTextColor={'#BABABA'}></TextInput>
             <View style={styles.invite}>
-              <Text style={{fontSize:15, fontWeight:'bold'}}>Invite to Workspace</Text>
-              <View style={{flexDirection:'row', gap: 10, alignItems:'center'}}>
-                <View style={{backgroundColor:'#DDDDDD',width:40,height:40, borderRadius:100, padding: 10, alignItems:'center', justifyContent:'center'}}>
-                <Icon name='user-plus' size={20}/>
+              <Text style={[styles.textDate, { fontWeight: 'bold', marginTop: 10 }]}>Invite to Workspace</Text>
+              <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center', marginTop: 10 }}>
+                <View style={{ backgroundColor: '#DDDDDD', width: 40, height: 40, borderRadius: 100, padding: 10, alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon name='user-plus' size={20} />
                 </View>
-                <TextInput placeholder='Search by e-mail or username' />
+                <TextInput placeholder='Search by e-mail or username' placeholderTextColor={'#B3B3B3'} style={{ borderBottomWidth: 1, width: 300, borderBottomColor: '#B3B3B3' }} />
               </View>
-              <TouchableOpacity style={{backgroundColor:"#73777B",borderRadius: 10, padding: 10, justifyContent:'center', alignItems:'center', width:350, marginTop:10 }}>
-                <Text style={{fontSize:15, fontWeight:'bold'}}>Invite</Text>
+              <TouchableOpacity style={{ backgroundColor: "#EA4463", borderRadius: 10, padding: 10, justifyContent: 'center', alignItems: 'center', width: 350, marginTop: 20 }}>
+                <Text style={[styles.textDate, { fontSize: 15, fontWeight: 'bold' }]}>Invite</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -358,17 +596,24 @@ function Home({navigation}): JSX.Element {
       >
         <View style={styles.leftView}>
           <View style={styles.menuContent}>
+            <View style={styles.headMenu}>
+              {/* When click btn, app will navigate to the recent Workspace */}
+              <TouchableOpacity style={styles.spaceName} onPress={() => navigation.navigate('home')}>
+                {/* Hiển Thị tên WorkSpace hiện tại */}
+                <Text style={{ fontSize: 18, color: '#EA4463', fontWeight: 'bold' }}>Workspace</Text>
+              </TouchableOpacity>
 
-
-            <View style={styles.spaceName}>
-              {/* Hiển Thị tên WorkSpace hiện tại */}
-              <Text style={{ fontSize: 18, color: 'white' }}>Workspace</Text>
+              <TouchableOpacity onPress={() => setMenuResponsive(!menuResponsive)}>
+                <Icon name='chevron-left' size={25} color={'#EA4463'} />
+              </TouchableOpacity>
             </View>
+
+
 
             <View style={styles.workSpacesContainer}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 }}>
                 <Text style={{ color: 'white' }}>WORKSPACES</Text>
-                <TouchableOpacity style={{ backgroundColor: '#73777B', borderRadius: 10, padding: 5 }} onPress={() => setModalCreateW(true)}>
+                <TouchableOpacity style={{ backgroundColor: '#616161', borderRadius: 10, padding: 5 }} onPress={() => setModalCreateW(true)}>
                   <Icon name='plus' size={20} color={'white'} />
                 </TouchableOpacity>
               </View>
@@ -376,21 +621,27 @@ function Home({navigation}): JSX.Element {
               <View style={styles.workSpaceWrapper}>
                 <TouchableOpacity style={{ padding: 10, borderRadius: 5, flexDirection: 'row', justifyContent: 'flex-start', gap: 10, alignItems: 'center' }}>
                   {/* Hiện thị logo của Work Space */}
-                  <Text style={{ color: 'white', backgroundColor: 'red', padding: 10, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>W</Text>
+                  <View style={{ backgroundColor: '#EA4463', padding: 10, borderRadius: 10, justifyContent: 'center', alignItems: 'center', width: 35 }}>
+                    <Text style={{ color: 'white', }}>S</Text>
+                  </View>
                   {/* Hiện thị tên của Work Space */}
                   <Text style={{ color: 'white' }}>SSD</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={{ padding: 10, borderRadius: 5, flexDirection: 'row', justifyContent: 'flex-start', gap: 10, alignItems: 'center' }}>
                   {/* Hiện thị logo của Work Space */}
-                  <Text style={{ color: 'white', backgroundColor: 'red', padding: 10, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>W</Text>
+                  <View style={{ backgroundColor: '#EA4463', padding: 10, borderRadius: 10, justifyContent: 'center', alignItems: 'center', width: 35 }}>
+                    <Text style={{ color: 'white', }}>S</Text>
+                  </View>
                   {/* Hiện thị tên của Work Space */}
                   <Text style={{ color: 'white' }}>SSD</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={{ padding: 10, borderRadius: 5, flexDirection: 'row', justifyContent: 'flex-start', gap: 10, alignItems: 'center' }}>
                   {/* Hiện thị logo của Work Space */}
-                  <Text style={{ color: 'white', backgroundColor: 'red', padding: 10, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>W</Text>
+                  <View style={{ backgroundColor: '#EA4463', padding: 10, borderRadius: 10, justifyContent: 'center', alignItems: 'center', width: 35 }}>
+                    <Text style={{ color: 'white', }}>S</Text>
+                  </View>
                   {/* Hiện thị tên của Work Space */}
                   <Text style={{ color: 'white' }}>SSD</Text>
                 </TouchableOpacity>
@@ -429,7 +680,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'flex-start',
     // alignItems: 'flex-start',
-    backgroundColor: '#434242',
+    backgroundColor: '#2E3135',
     flexDirection: 'column',
     width: 300,
   },
@@ -446,7 +697,14 @@ const styles = StyleSheet.create({
   spaceName: {
     height: 50,
     justifyContent: 'center',
-    borderBottomWidth: 0.5
+
+  },
+  headMenu: {
+    flexDirection: 'row',
+    borderBottomWidth: 0.5,
+    borderColor: '#4E4E4E',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   workSpacesContainer: {
     // marginTop:10,
@@ -462,14 +720,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: 10
   },
-  MiddleWrap: {
-    // marginTop: 10,
-    // paddingVertical:20,
+  // MiddleWrap: {
+  //   // marginTop: 10,
+  //   // paddingVertical:20,
+  //   flexDirection: 'column',
+  //   gap: 20,
+  //   backgroundColor: 'red'
+  // },
+
+  Projects: {
     flexDirection: 'column',
+    gap: 20,
   },
+
   invite: {
     flexDirection: 'column',
-    marginTop:10,
+    marginTop: 10,
     // paddingVertical: 20
     // justifyContent: 'center',
     // alignItems: 'flex-start',
@@ -479,7 +745,7 @@ const styles = StyleSheet.create({
     // height: 80,
     borderWidth: 1,
     // backgroundColor: '#FF6969',
-    borderColor: "#7F8487",
+    borderColor: "#4E4E4E",
     borderRadius: 10,
     padding: 15,
     marginHorizontal: 10,
@@ -582,7 +848,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#2E3135',
     borderRadius: 10,
     padding: 20,
     alignItems: 'center',
@@ -595,6 +861,7 @@ const styles = StyleSheet.create({
     // shadowOpacity:1,
     // shadowRadius: 4,
     // elevation: 5,
+    // width: 350
   },
   button: {
     borderRadius: 20,
@@ -627,7 +894,7 @@ const styles = StyleSheet.create({
   Input: {
     width: 350,
     padding: 10,
-    backgroundColor: '#DDDDDD',
+    backgroundColor: '#5B5B5B',
     borderRadius: 10,
     // borderWidth:1,
     // borderColor:'grey'
@@ -685,12 +952,15 @@ const styles = StyleSheet.create({
   },
 
   DateButton: {
-
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 80,
     padding: 5,
     borderColor: '#7F8487',
     borderWidth: 0.6,
     borderRadius: 20,
+    gap: 10
 
   },
   DateText: {
@@ -718,9 +988,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     padding: 10,
-
-
-
 
   },
 
@@ -762,10 +1029,52 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
 
+
   },
 
+  textDate: {
+    fontSize: 15,
+    color: 'white',
+    fontWeight: 'normal'
+  },
+
+  endDate: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+    width: 350,
+    backgroundColor: '#3E3E3E',
+    borderRadius: 10
+  },
+  Calendar: {
+    backgroundColor: '#5B5B5B',
+    borderRadius: 10,
+    padding: 10
+  },
+  UserContainer: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    width: 350,
+    gap: 20
+  },
+  Infor: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: 10
+  },
+  avt: {
+    backgroundColor: 'white',
+    borderRadius: 100,
+    width: 50,
+    height: 50,
+  }
 
 
 });
 
 export default Home;
+
+
