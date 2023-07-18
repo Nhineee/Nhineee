@@ -34,7 +34,7 @@ import { TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 
-function Home(): JSX.Element {
+function Home({ navigation }): JSX.Element {
     const isDarkMode = useColorScheme() === 'dark';
 
     const backgroundStyle = {
