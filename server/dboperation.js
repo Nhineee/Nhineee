@@ -1,6 +1,9 @@
+/// => Sửa file thành dbpoperation.js
+
 const sql = require('mssql');
 const config = require('./dbconfig')
 
+//LOGIN 
 async function login(request, response) {
   try {
     const {
@@ -33,6 +36,7 @@ async function login(request, response) {
   }
 }
 
+//REGISTER
 async function register(request, response) {
   try {
     const {
@@ -51,8 +55,8 @@ async function register(request, response) {
         `;
       const checkUserResult = await pool
         .request()
-        .input('username', sql.VarChar, username)
-        .input('email', sql.VarChar, email)
+        .input('username', sql.NVarChar, username)
+        .input('email', sql.NVarChar, email)
         .query(checkUserQuery);
 
       if (checkUserResult.recordset.length > 0) {
@@ -64,9 +68,9 @@ async function register(request, response) {
           `;
         const insertUserResult = await pool
           .request()
-          .input('email', sql.VarChar, email)
-          .input('username', sql.VarChar, username)
-          .input('password', sql.VarChar, password)
+          .input('email', sql.NVarChar, email)
+          .input('username', sql.NVarChar, username)
+          .input('password', sql.NVarChar, password)
           .query(insertUserQuery);
 
         return response.status(200).send(`Welcome ${username}`);
@@ -83,11 +87,14 @@ async function register(request, response) {
 async function getTask() {
   let pool = await sql.connect(config)
   let retrieve = await pool.request()
-    .query(`SELECT * FROM taskss`)
+    .query(`SELECT * FROM Task5`)
 
   console.log(retrieve.recordsets);
   return retrieve.recordsets;
 }
+
+
+
 
 /// *ADD TASK DATA* ///
 async function addTask(task) {
@@ -96,11 +103,19 @@ async function addTask(task) {
     let pool = await sql.connect(config)
     let add = await pool.request()
       .input('taskname', sql.NVarChar, task.taskname)
-      .input('assigneel', sql.NVarChar, task.assigneel)
       .input('description', sql.NVarChar, task.description)
-      .input('dueday', sql.NVarChar, task.dueday)
+      .input('status', sql.NVarChar, task.status)
+      .input('due_date', sql.NVarChar, task.due_date)
+      .input('priority', sql.NVarChar, task.priority)
+      .input('username', sql.NVarChar, task.username)
+      .input('role', sql.NVarChar, task.role)
+      .input('projectname', sql.NVarChar, task.projectname)
+      .input('projectdes', sql.NVarChar, task.projectdes)
+      .input('start_date', sql.NVarChar, task.start_date)
+      .input('end_date', sql.NVarChar, task.end_date)
+
       .query(
-        `INSERT INTO taskss (taskname, assigneel, description, dueday) VALUES (@taskname, @assigneel, @description, @dueday)`
+        `INSERT INTO Task5 (taskname, description, status, due_date, priority, username, role, projectname, projectdes, start_date, end_date) VALUES (@taskname, @description, @status, @due_date, @priority, @username, @role, @projectname, @projectdes, @start_date, @end_date)`,
       )
 
     return add.recordsets;
@@ -109,6 +124,7 @@ async function addTask(task) {
     console.log(error);
   }
 }
+
 /// *UPDATE TASK DATA* ///
 async function updateTask(taskid, task) {
   try {
@@ -116,11 +132,19 @@ async function updateTask(taskid, task) {
     let update = await pool.request()
       .input('taskid', sql.Int, taskid)
       .input('taskname', sql.NVarChar, task.taskname)
-      .input('assigneel', sql.NVarChar, task.assigneel)
       .input('description', sql.NVarChar, task.description)
-      .input('dueday', sql.NVarChar, task.dueday)
+      .input('status', sql.NVarChar, task.status)
+      .input('due_date', sql.NVarChar, task.due_date)
+      .input('priority', sql.NVarChar, task.priority)
+      .input('username', sql.NVarChar, task.username)
+      .input('role', sql.NVarChar, task.role)
+      .input('projectname', sql.NVarChar, task.projectname)
+      .input('projectdes', sql.NVarChar, task.projectdes)
+      .input('start_date', sql.NVarChar, task.start_date)
+      .input('end_date', sql.NVarChar, task.end_date)
+
       .query(
-        `UPDATE taskss SET taskname = @taskname, assigneel = @assigneel, description = @description, dueday = @dueday WHERE taskid = @taskid`
+        `UPDATE Task5 SET taskname = @taskname, description = @description, status = @status, due_date = @due_date, priority = @priority, username = @username, role = @role, projectname = @projectname, start_date = @start_date, end_date = @end_date WHERE taskid = @taskid`
       )
 
     return update.recordsets;
@@ -128,21 +152,24 @@ async function updateTask(taskid, task) {
     console.log(error);
   }
 }
+
+
 /// *DELETE TASK DATA* ///
 async function delTask(taskid) {
   let pool = await sql.connect(config)
   let del = await pool.request()
     .input('taskid', sql.Int, taskid)
-    .query(`DELETE FROM taskss WHERE taskid = @taskid`)
+    .query(`DELETE FROM Task5 WHERE taskid = @taskid`)
 
   return del.recordsets;
 }
+
+
 async function test(request, response) {
   const pool = await sql.connect(config);
   const test = await pool
     .request()
-    // .query(`SELECT * from users`);
-    .query(`SELECT* from taskss`)
+    .query(`SELECT* from Task5`)
 
   return test.recordset;
 }
