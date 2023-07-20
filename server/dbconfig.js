@@ -1,7 +1,7 @@
 const config = {
   user: 'sa',
   password: 'duyen1234',
-  database: 'pmgv',
+  database: 'pmgiaoviec',
   server: 'localhost',
   pool: {
     max: 10,
@@ -17,5 +17,8 @@ const config = {
 }
 
 module.exports = config;
+
+
+
 
 
