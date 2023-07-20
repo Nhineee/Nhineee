@@ -1,9 +1,6 @@
-/// => Sửa file thành dbpoperation.js
-
 const sql = require('mssql');
 const config = require('./dbconfig')
 
-//LOGIN 
 async function login(request, response) {
   try {
     const {
@@ -36,7 +33,8 @@ async function login(request, response) {
   }
 }
 
-//REGISTER
+
+
 async function register(request, response) {
   try {
     const {
@@ -82,8 +80,6 @@ async function register(request, response) {
   }
 }
 
-
-/// *GET TASK DATA* ///
 async function getTask() {
   let pool = await sql.connect(config)
   let retrieve = await pool.request()
@@ -94,9 +90,6 @@ async function getTask() {
 }
 
 
-
-
-/// *ADD TASK DATA* ///
 async function addTask(task) {
   try {
 
@@ -117,7 +110,6 @@ async function addTask(task) {
       .query(
         `INSERT INTO Task5 (taskname, description, status, due_date, priority, username, role, projectname, projectdes, start_date, end_date) VALUES (@taskname, @description, @status, @due_date, @priority, @username, @role, @projectname, @projectdes, @start_date, @end_date)`,
       )
-
     return add.recordsets;
 
   } catch (error) {
@@ -125,7 +117,7 @@ async function addTask(task) {
   }
 }
 
-/// *UPDATE TASK DATA* ///
+
 async function updateTask(taskid, task) {
   try {
     let pool = await sql.connect(config)
@@ -146,6 +138,33 @@ async function updateTask(taskid, task) {
       .query(
         `UPDATE Task5 SET taskname = @taskname, description = @description, status = @status, due_date = @due_date, priority = @priority, username = @username, role = @role, projectname = @projectname, start_date = @start_date, end_date = @end_date WHERE taskid = @taskid`
       )
+    return update.recordsets;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function delTask(taskid) {
+  let pool = await sql.connect(config)
+  let del = await pool.request()
+    .input('taskid', sql.Int, taskid)
+    .query(`DELETE FROM taskss WHERE taskid = @taskid`)
+
+  return del.recordsets;
+}
+
+async function updateUser(id, user) {
+  try {
+    let pool = await sql.connect(config)
+    let update = await pool.request()
+      .input('id', sql.Int, id)
+      .input('email', sql.NVarChar, user.email)
+      .input('username', sql.NVarChar, user.username)
+      .input('password', sql.NVarChar, user.password)
+
+      .query(
+        `UPDATE users SET email = @email , username = @username, password = @password WHERE id = @id`
+      )
 
     return update.recordsets;
   } catch (error) {
@@ -153,22 +172,85 @@ async function updateTask(taskid, task) {
   }
 }
 
+async function getUser() {
+  let pool = await sql.connect(config)
+  let retrieve = await pool.request()
+    .query(`SELECT * FROM users`)
 
-/// *DELETE TASK DATA* ///
-async function delTask(taskid) {
+  console.log(retrieve.recordsets);
+  return retrieve.recordsets;
+}
+
+async function delUser(id) {
   let pool = await sql.connect(config)
   let del = await pool.request()
-    .input('taskid', sql.Int, taskid)
-    .query(`DELETE FROM Task5 WHERE taskid = @taskid`)
+    .input('id', sql.Int, id)
+    .query(`DELETE FROM users WHERE id = @id`)
 
   return del.recordsets;
 }
 
+async function getCom() {
+  let pool = await sql.connect(config)
+  let retrieve = await pool.request()
+    .query(`SELECT * FROM Commentt`)
+
+  console.log(retrieve.recordsets);
+  return retrieve.recordsets;
+}
+
+async function addCom(com) {
+  try {
+
+    let pool = await sql.connect(config)
+    let add = await pool.request()
+      .input('contentt', sql.NVarChar, com.contentt)
+      .input('taskname', sql.NVarChar, com.taskname)
+      .input('username', sql.NVarChar, com.username)
+      .query(
+        `INSERT INTO Commentt (contentt, taskname, username) VALUES (@contentt, @taskname, @username)`
+      )
+
+    return add.recordsets;
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function updateCom(comid, com) {
+  try {
+    let pool = await sql.connect(config)
+    let update = await pool.request()
+      .input('comid', sql.Int, comid)
+      .input('contentt', sql.NVarChar, com.contentt)
+      .input('taskname', sql.NVarChar, com.taskname)
+      .input('username', sql.NVarChar, com.username)
+
+      .query(
+        `UPDATE Commentt SET contentt = @contentt , taskname = @taskname ,username = @username WHERE comid = @comid`
+      )
+
+    return update.recordsets;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function delCom(comid) {
+  let pool = await sql.connect(config)
+  let del = await pool.request()
+    .input('comid', sql.Int, comid)
+    .query(`DELETE FROM delCom WHERE comid = @comid`)
+
+  return del.recordsets;
+}
 
 async function test(request, response) {
   const pool = await sql.connect(config);
   const test = await pool
     .request()
+    // .query(`SELECT * from users`);
     .query(`SELECT* from Task5`)
 
   return test.recordset;
@@ -184,4 +266,11 @@ module.exports = {
   getTask,
   delTask,
   updateTask,
+  getUser,
+  updateUser,
+  delUser,
+  getCom,
+  addCom,
+  updateCom,
+  delCom
 }
