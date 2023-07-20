@@ -241,7 +241,7 @@ async function delCom(comid) {
   let pool = await sql.connect(config)
   let del = await pool.request()
     .input('comid', sql.Int, comid)
-    .query(`DELETE FROM delCom WHERE comid = @comid`)
+    .query(`DELETE FROM Commentt WHERE comid = @comid`)
 
   return del.recordsets;
 }
