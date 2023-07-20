@@ -34,7 +34,6 @@ import {
 
 
 
-
 function SignIn({navigation}): JSX.Element {
     const isDarkMode = useColorScheme() === 'dark';
 
@@ -43,6 +42,39 @@ function SignIn({navigation}): JSX.Element {
     };
 
     const [modalVisible, setModalVisible] = useState(false);
+    /////////// call api
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    function onSubmitHandler () {
+        fetch(`http://192.168.39.102:8090/api/login`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            "username": username,
+            "password": password
+          }),
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          } else {
+            Alert.alert('success','Login success');
+            navigation.navigate('Home')
+          }
+          
+        })
+        .catch(error => {
+          // Xử lý lỗi từ server
+          console.log(error.message);
+          // Hiển thị thông báo lỗi cho người dùng
+          // Ví dụ:
+          Alert.alert("Error", "An error occurred. Please try again later.");
+        });
+      };
+
 
     return (
         <View style={styles.container}>
@@ -70,8 +102,21 @@ function SignIn({navigation}): JSX.Element {
                             source={require('./Image/faceLogo.png')}
                         />  Sign in with Facebook</Text></TouchableOpacity>
 
-                        <TextInput style={styles.inputStyle} placeholder='Username or email' placeholderTextColor={'#92969C'} ></TextInput>
-                        <TextInput style={styles.inputStyle} placeholder='Password' placeholderTextColor={'#92969C'}></TextInput>
+                        <TextInput 
+                            style={styles.inputStyle} 
+                            placeholder='Username or email' 
+                            placeholderTextColor={'#92969C'}  
+                            value={username}
+                            onChangeText={text => setUsername(text)}
+                        ></TextInput>
+                        <TextInput 
+                            style={styles.inputStyle} 
+                            placeholder='Password' 
+                            placeholderTextColor={'#92969C'}
+                            secureTextEntry
+                            value={password}
+                            onChangeText={text => setPassword(text)}
+                            ></TextInput>
                     </View>
                 </View>
 
@@ -103,7 +148,7 @@ function SignIn({navigation}): JSX.Element {
                         </Pressable>
                     </View>
                     </View>
-                    
+                
 
                 </Modal>
                 <Pressable onPress={() => setModalVisible(true)} style={{ marginTop: 10 }}>
@@ -114,17 +159,18 @@ function SignIn({navigation}): JSX.Element {
 
             <View style={styles.loginButtonContainer}>
                 <View>
-                    <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate('home')}><Text style={{ color: 'white' }}>Sign In</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={onSubmitHandler} ><Text style={{ color: 'white' }}>Sign In</Text></TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                     <Text style={styles.textStyle}> Don't have an account?</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('signUp')}><Text style={styles.textStyleSU}> Sign Up</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('SignUp')}><Text style={styles.textStyleSU}> Sign Up</Text></TouchableOpacity>
                     
                 </View>
             </View>
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {
