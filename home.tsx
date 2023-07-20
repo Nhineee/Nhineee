@@ -45,7 +45,7 @@ function Home({ navigation }): JSX.Element {
   };
   const [showModal, setShowModal] = useState(false);
 
-
+  
 
 
 
@@ -90,7 +90,7 @@ function Home({ navigation }): JSX.Element {
 
       <View style={styles.WrapBigContent}>
 
-        <Text style={styles.miniTitle}>MY TASKS</Text>
+        <Text style={styles.miniTitle}>MY PROJECT</Text>
 
         <View style={styles.Projects}>
           {/* Contain Project */}
