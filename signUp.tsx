@@ -59,6 +59,8 @@ function SignUp({navigation}): JSX.Element {
             Alert.alert('Sign up failed');
           } else {
             Alert.alert('Successfully registered');
+            navigation.navigate('SignIn')
+
           }
           
         })
