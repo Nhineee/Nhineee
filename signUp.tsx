@@ -39,8 +39,30 @@ function SignUp({navigation}): JSX.Element {
 
 
     };
-
-
+    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const Register = () => {
+        fetch(`http://192.168.39.102:8090/api/register`, {
+          method:'POST',
+          headers:{
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify ({
+              "email": email,
+              "username": username,
+              "password": password
+          })
+        })
+        .then(response => {
+          if(!response.ok){
+            Alert.alert('Sign up failed');
+          } else {
+            Alert.alert('Successfully registered');
+          }
+          
+        })
+      }
 
     return (
         <View style={styles.container}>
@@ -78,9 +100,25 @@ function SignUp({navigation}): JSX.Element {
                 <View >
                     <KeyboardAvoidingView
                         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                        <TextInput style={styles.inputStyle} placeholder='Email' placeholderTextColor={'#92969C'}></TextInput>
-                        <TextInput style={styles.inputStyle} placeholder='Username' placeholderTextColor={'#92969C'} ></TextInput>
-                        <TextInput style={styles.inputStyle} placeholder='Password' placeholderTextColor={'#92969C'} ></TextInput>
+                        <TextInput 
+                            style={styles.inputStyle} 
+                            placeholder='Email' 
+                            placeholderTextColor={'#92969C'}
+                            onChangeText={text => setEmail(text)}
+                            ></TextInput>
+                        <TextInput 
+                            style={styles.inputStyle} 
+                            placeholder='Username' 
+                            placeholderTextColor={'#92969C'} 
+                            onChangeText={text => setUsername(text)}
+                            ></TextInput>
+                        <TextInput 
+                            style={styles.inputStyle} 
+                            placeholder='Password' 
+                            placeholderTextColor={'#92969C'} 
+                            secureTextEntry
+                            onChangeText={text => setPassword(text)}
+                            ></TextInput>
                     </KeyboardAvoidingView>
 
                 </View>
@@ -91,11 +129,16 @@ function SignUp({navigation}): JSX.Element {
 
             <View style={styles.loginButtonContainer}>
                 <View>
-                    <TouchableOpacity style={styles.button}><Text style={{ color: 'white' }}>Sign Up</Text></TouchableOpacity>
+                    <TouchableOpacity 
+                        style={styles.button}>
+                            <Text style={{ color: 'white' }} onPress={Register}>Sign Up</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                     <Text style={styles.textStyle}> Already have an account?</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('signIn')}><Text style={styles.textStyleSU}> Sign In</Text></TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={styles.textStyleSU} onPress={() => navigation.navigate('SignIn')}> Sign In</Text>
+                    </TouchableOpacity>
 
                 </View>
             </View>
@@ -192,7 +235,8 @@ const styles = StyleSheet.create({
         height: 40,
         marginTop: 10,
         backgroundColor: '#1C1F22',
-        padding: 10
+        padding: 10,
+        color: '#ffffff'
     },
 
 
